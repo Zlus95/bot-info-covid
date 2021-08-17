@@ -7,7 +7,7 @@ bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name}!`));
 // bot.help((ctx) => ctx.reply('Send me a sticker'));
 bot.on('text', async (ctx) => {
   let data = {};
-  data = await api.getReportsByCountries('russia');
+  data = await api.getReportsByCountries(ctx.message.text);
 
   const formatData = `
 Страна: ${data[0][0].country}
