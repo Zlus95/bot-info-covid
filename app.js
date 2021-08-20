@@ -13,26 +13,43 @@ Markup.keyboard([
   .resize()));
 
 bot.help((ctx) => ctx.reply(ListCountries));
-
 bot.on('text', async (ctx) => {
   let data = {};
   try {
     data = await api.getReportsByCountries(ctx.message.text);
-
-    const formatData = `
-Страна: ${data[0][0].country}
-Флаг: ${data[0][0].flag}
-Случаи: ${data[0][0].cases}
-Смертей: ${data[0][0].deaths}
-Вылечились: ${data[0][0].recovered}
-Aтивные случаи : ${data[0][0].active_cases}
+    
+    const DataFormat = `
+    Страна: ${data[0][0].country}
+    Флаг: ${data[0][0].flag}
+    Всего заражений: ${data[0][0].cases}
+    Всего смертей: ${data[0][0].deaths}
+    Всего вылечилось: ${data[0][0].recovered}
     `;
-    ctx.reply(formatData);
+    ctx.reply(DataFormat);
   } catch {
     console.log('Ошибка');
     ctx.reply('Ошибка ввода. Полный список стран можно посмотреть /help');
   }
 });
 bot.launch();
-
 console.log('Бот готов');
+
+// bot.command('hipster', Telegraf.reply('λ'));
+// bot.hears('us', async (ctx) => {
+  //   let data = {};
+//   try {
+  //     data = await api.getCountriesWhereCoronavirusHasSpread(ctx.message.text);
+
+//     const DataFormat = `
+// Страна: ${data[0][0].Country}
+// Всего заражений: ${data[0][0].Cases}
+// Смерти: ${data[0][0].Deaths}
+// Регион: ${data[0][0].Region}
+
+// `;
+//     ctx.reply(DataFormat);
+//   } catch {
+//     console.log('Ошибка');
+//     ctx.reply('Ошибка ввода. Полный список стран можно посмотреть /help');
+//   }
+// });
